@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://ct6tnidunhkdu"]
+
+[sub_resource type="Gradient" id="Gradient_cgmii"]
+colors = PackedColorArray(0.2, 0.2, 0.560784, 1, 0.0470588, 0.0470588, 0.113725, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_82rui"]
+gradient = SubResource("Gradient_cgmii")
+fill_from = Vector2(1, 0.56044)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_6hsac"]
+night_sky = SubResource("GradientTexture2D_82rui")
+
+[sub_resource type="Sky" id="Sky_yw564"]
+sky_material = SubResource("PhysicalSkyMaterial_6hsac")
+
+[sub_resource type="Environment" id="Environment_lc5bo"]
+background_mode = 2
+sky = SubResource("Sky_yw564")
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.054902, 0.054902, 0.054902, 1)
+
+[sub_resource type="Animation" id="Animation_jxud6"]
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.785398, 0), Vector3(6.28319, 0.785398, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wrgii"]
+resource_name = "day_night_cycle"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.785398, 0), Vector3(6.28319, 0.785398, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87cf6"]
+_data = {
+"RESET": SubResource("Animation_jxud6"),
+"day_night_cycle": SubResource("Animation_wrgii")
+}
+
+[node name="DayNightCycle" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lc5bo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_87cf6")
+}

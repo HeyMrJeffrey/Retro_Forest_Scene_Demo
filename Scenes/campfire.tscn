@@ -47,6 +47,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_62atk"]
 material = SubResource("StandardMaterial3D_2ec2m")
+size = Vector2(2, 2)
 
 [sub_resource type="Gradient" id="Gradient_nlfop"]
 offsets = PackedFloat32Array(0.414634, 0.756098, 1)
@@ -90,7 +91,7 @@ light_color = Color(0.698039, 0.52549, 0.145098, 1)
 omni_range = 25.0
 
 [node name="flames" type="GPUParticles3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.199178, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332944, 0)
 amount = 16
 preprocess = 2.0
 process_material = SubResource("ParticleProcessMaterial_ys11g")
